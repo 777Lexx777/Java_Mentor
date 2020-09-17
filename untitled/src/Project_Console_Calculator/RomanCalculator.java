@@ -7,76 +7,83 @@ import java.util.Scanner;
 public class RomanCalculator  {
 
     ListForRomanCalculator listForRomanCalculator = new ListForRomanCalculator();
-    Scanner scanner = new Scanner(System.in);
-    private String operation = null;
-    private String y = null;
-    private String z = null;
-    private int cont = 0;
+    private String[] subRom;
+    private String a;
+    private String b;
+    private String strRom = null;
+    private String contRom ;
 
     public  void   romanCalculation(){
 
         while (true) {
-            System.out.println("Введите первое число от 'I'<-(эта буква I) до 'X' (ВСЕ БУКВЫ ЗАГЛАВНЫЕ) ;");
-                try {
-                    y = scanner.next();
-                        while (! (y.equals(listForRomanCalculator.calculatorNumberRoman(y)))){
-                            System.out.println("Вы ввели не верное значение... ");
-                            System.out.println("Введите первое число от 'I'<-(эта буква I) до 'X' (ВСЕ БУКВЫ ЗАГЛАВНЫЕ) ;");
-                            y = scanner.next();
-                        }
-                } catch (InputMismatchException e) { }
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("\n  Введите операцию с двумя числами: a + b, a - b, a * b или a / b " +
+                    "\n  ВНИМАНИЕ: числа от  'I'<-(эта буква I) до 'X' (ВСЕ БУКВЫ ЗАГЛАВНЫЕ) ;");
 
-            System.out.println("\nДалее выберите действие: +, -, * или / ;");
-                operation = scanner.next();
-                    while (! (operation.equals("+") || operation.equals("-") ||
-                            operation.equals("*") || operation.equals("/"))) {
-                        System.out.println("Вы ввели не верное значение ");
-                        System.out.println("Введите действие: +, -, * или / ;");
-                        operation = scanner.next();
-                    }
+            strRom = scanner.nextLine();
 
-            System.out.println("Введите второе число от 'I'<-(эта буква I) до 'X' (ВСЕ БУКВЫ ЗАГЛАВНЫЕ) ");
-                try {
-                    z = scanner.next();
-                        while (! (z.equals(listForRomanCalculator.calculatorNumberRoman(z)))){
-                            System.out.println("Вы ввели не верное значение... ");
-                            System.out.println("Введите второе число от 'I'<-(эта буква I) до 'X' (ВСЕ БУКВЫ ЗАГЛАВНЫЕ) ;");
-                            z = scanner.next();
-                        }
-                } catch (InputMismatchException e) {  }
+            if (strRom.contains("-")) subRom = strRom.split("-");
 
-            System.out.print("\n   Input: " + "\n\n   " + y + " " + operation + " " + z );
+            if (strRom.contains("/")) subRom = strRom.split("/");
 
-            if (operation.equals("+")) {
-                int s = listForRomanCalculator.calculatorNumberArabic(y) +
-                        listForRomanCalculator.calculatorNumberArabic(z);
-                String result = arabicToRoman( s);
-                System.out.println("\n\n   Output: " + "\n\n   " + result);
+            if (strRom.contains("+")) subRom = strRom.split("\\+");
+
+            if (strRom.contains("*")) subRom = strRom.split("\\*");
+
+            a = subRom[0];
+            b = subRom[1];
+
+            try {
+                if (! (a.equals(listForRomanCalculator.calculatorNumberRoman(a)))){
+                    throw new Exception("Числa  должны быть от  'I'<-(эта буква I) до 'X' (ВСЕ БУКВЫ ЗАГЛАВНЫЕ) ");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                break;
             }
-            if (operation.equals("-")) {
-                int s = listForRomanCalculator.calculatorNumberArabic(y) -
-                        listForRomanCalculator.calculatorNumberArabic(z);
-                String result = arabicToRoman( s);
-                System.out.println("\n\n   Output: " + "\n\n   " + result);
-            }
-            if (operation.equals("*")) {
-                int s = listForRomanCalculator.calculatorNumberArabic(y) *
-                        listForRomanCalculator.calculatorNumberArabic(z);
-                String result = arabicToRoman( s);
-                System.out.println("\n\n   Output: " + "\n\n   " + result);
-            }
-            if (operation.equals("/")) {
-                int s = listForRomanCalculator.calculatorNumberArabic(y) /
-                        listForRomanCalculator.calculatorNumberArabic(z);
-                String result = arabicToRoman( s);
-                System.out.println("\n\n   Output: " + "\n\n   " + result);
+            try {
+                if (! (b.equals(listForRomanCalculator.calculatorNumberRoman(b)))){
+                    throw new Exception("Числa  должны быть от  'I'<-(эта буква I) до 'X' (ВСЕ БУКВЫ ЗАГЛАВНЫЕ) ");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                break;
             }
 
-            System.out.print("\n  Закончить вычисления нажмите - 2 ; " +
+            if (strRom.contains("-")) {
+                int s = listForRomanCalculator.calculatorNumberArabic(a) -
+                        listForRomanCalculator.calculatorNumberArabic(b);
+                String result = arabicToRoman( s);
+                System.out.print("   Input: " + "\n\n   " + a + " " + " - " + " " + b);
+                System.out.println("\n\n   Output: " + "\n\n   " + result);
+            }
+            if (strRom.contains("/")) {
+                int s = listForRomanCalculator.calculatorNumberArabic(a) /
+                        listForRomanCalculator.calculatorNumberArabic(b);
+                String result = arabicToRoman( s);
+                System.out.print("   Input: " + "\n\n   " + a + " " + " / " + " " + b);
+                System.out.println("\n\n   Output: " + "\n\n   " + result);
+            }
+            if (strRom.contains("+")) {
+                int s = listForRomanCalculator.calculatorNumberArabic(a) +
+                        listForRomanCalculator.calculatorNumberArabic(b);
+                String result = arabicToRoman( s);
+                System.out.print("   Input: " + "\n\n   " + a + " " + " + " + " " + b);
+                System.out.println("\n\n   Output: " + "\n\n   " + result);
+            }
+            if (strRom.contains("*")) {
+                int s = listForRomanCalculator.calculatorNumberArabic(a) *
+                        listForRomanCalculator.calculatorNumberArabic(b);
+                String result = arabicToRoman( s);
+                System.out.print("   Input: " + "\n\n   " + a + " " + " * " + " " + b);
+                System.out.println("\n\n   Output: " + "\n\n   " + result);
+            }
+
+            System.out.print("\n  Закончить вычисления нажмите - q или Q ; " +
                     "\n  Для продолжения вычисления, нажмите любую другую клавишу;  ");
 
-            cont = scanner.nextInt();
-            if (cont == 2) {break;}
+            contRom = scanner.next();
+            if (contRom.equalsIgnoreCase("q")) break;
         }
     }
 

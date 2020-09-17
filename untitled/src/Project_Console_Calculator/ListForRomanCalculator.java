@@ -22,7 +22,7 @@ public class ListForRomanCalculator {
                 calculatorNumber.put("X",10);
 
         if (calculatorNumber.containsKey(name)) {
-            System.out.println("Эта арабская цифра " + calculatorNumber.get(name));
+
             return name;
         }else {
             return null;
