@@ -9,7 +9,6 @@ public class CalculatorMain {
         Scanner scanner = new Scanner(System.in);
         ArabicCalculator arabicCalculator = new ArabicCalculator();
         RomanCalculator romanCalculator = new RomanCalculator();
-
         int a = 0;
 
         System.out.println("\nВыбирите какой алькулятор хотите использовать, нажмите цифру 1 - если арабский " +

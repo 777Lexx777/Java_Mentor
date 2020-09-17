@@ -4,64 +4,63 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ArabicCalculator {
-    Scanner scanner = new Scanner(System.in);
-    String operation = null;
-    private int y = 0;
-    private int z = 0;
-    private int cont = 0;
+    private String strAr;
+    private String[] subStr;
+    private String cont ;
+    private int a;
+    private int b;
 
     public  void   arabicCalculation(){
 
         while (true) {
-              System.out.println("Введите первое число от 0 до 9 ;");
-              try {
-                  y = scanner.nextInt();
-                  while (y < 0 || y > 9) {
-                      System.out.println("Вы ввели не верное значение... ");
-                      System.out.println("Введите первое число от 0 до 9 ;");
-                      y = scanner.nextInt();
-                  }
-              } catch (NumberFormatException e) { }
+            Scanner scanner = new Scanner(System.in);
 
-              System.out.println("Введите действие: +, -, * или / ;");
-                    operation = scanner.next();
-                          while (! (operation.equals("+") || operation.equals("-") ||
-                                    operation.equals("*") || operation.equals("/"))) {
-                              System.out.println("Вы ввели не верное значение ");
-                              System.out.println("Введите действие: +, -, * или / ;");
-                            operation = scanner.next();
-                          }
+            System.out.println("\n  Введите операцию с двумя числами: a + b, a - b, a * b или a / b " +
+                    "\n  ВНИМАНИЕ: числа от  1 до 10 ;");
+            strAr = scanner.nextLine();
 
-              System.out.println("Введите второе число");
-                  try {
-                      z = scanner.nextInt();
-                          while (z < 0 || z > 9) {
-                              System.out.println("Вы ввели не верное значение... ");
-                              System.out.println("Введите первое число от 0 до 9 ;");
-                            z = scanner.nextInt();
-                          }
-                  } catch (InputMismatchException e) {  }
+            if (strAr.contains("-")) subStr = strAr.split("-");
 
-              System.out.print(" Input: " + "\n\n " + y + " " + operation + " " + z);
+            if (strAr.contains("/")) subStr = strAr.split("/");
 
-              if (operation.equals("+")) {
-                  System.out.println("\n\n Output: " + "\n\n " + (y + z));
-              }
-              if (operation.equals("-")) {
-                  System.out.println("\n\n Output: " + "\n\n " + (y - z));
-              }
-              if (operation.equals("*")) {
-                  System.out.println("\n\n Output: " + "\n\n " + (y * z));
-              }
-              if (operation.equals("/")) {
-                  System.out.println("\n\n Output: " + "\n\n " + (y / z));
-              }
+            if (strAr.contains("+")) subStr = strAr.split("\\+");
 
-              System.out.print("\n  Закончить вычисления нажмите - 2; " +
-                                    "\n  Для продолжения вычисления, нажмите любую другую клавишу;  ");
+            if (strAr.contains("*")) subStr = strAr.split("\\*");
 
-              cont = scanner.nextInt();
-              if (cont == 2) {break;}
+            a = Integer.parseInt(subStr[0]);
+            b = Integer.parseInt(subStr[1]);
+
+            try {
+                if (a < 1 || a > 10 || b < 1 || b > 10 ) {
+                    throw new Exception("Числa  должны быть от  1 до 10 ");
+                }
+
+                if (strAr.contains("-")) {
+                    System.out.print(" Input: " + "\n\n " + a + " " + " - " + " " + b);
+                    System.out.println("\n\n Output: " + "\n\n " + (a - b));
+                }
+                if (strAr.contains("+")) {
+                    System.out.print(" Input: " + "\n\n " + a + " " + " + " + " " + b);
+                    System.out.println("\n\n Output: " + "\n\n " + (a + b));
+                }
+                if (strAr.contains("*")) {
+                    System.out.print(" Input: " + "\n\n " + a + " " + " + " + " " + b);
+                    System.out.println("\n\n Output: " + "\n\n " + (a * b));
+                }
+                if (strAr.contains("/")) {
+                    System.out.print(" Input: " + "\n\n " + a + " " + " / " + " " + b);
+                    System.out.println("\n\n Output: " + "\n\n " + (a / b));
+                }
+                System.out.print("\n  Закончить вычисления нажмите - q или Q; " +
+                        "\n  Для продолжения вычисления, нажмите любую другую клавишу;  ");
+
+                cont = scanner.next();
+                if (cont.equalsIgnoreCase("q")) break;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                break;
+            }
         }
     }
 }
