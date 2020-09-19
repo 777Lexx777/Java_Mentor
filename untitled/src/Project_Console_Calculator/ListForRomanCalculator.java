@@ -6,7 +6,12 @@ import java.util.Map;
 public class ListForRomanCalculator {
 
     private Map<String, Integer> calculatorNumber = new HashMap<>();
+    private String [] calculatorNumber2 = {"1","2","3","4","5","6","7","8","9","10"};
 
+    public String  calculatorNumberArabicCalculator(String name){
+        String numberAr = name;
+        return numberAr;
+    }
 
     public String  calculatorNumberRoman(String name){
 
@@ -47,5 +52,4 @@ public class ListForRomanCalculator {
             return null;
         }
     }
-
 }
