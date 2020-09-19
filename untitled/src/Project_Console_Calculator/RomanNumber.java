@@ -22,9 +22,9 @@ enum RomanNumber {
     }
 
     public static List<RomanNumber> getReverseSortedValues() {
-        return Arrays.stream(values()).sorted(Comparator.comparing((RomanNumber e) -> e.value).reversed())
+        return Arrays.stream(values()).sorted(Comparator.comparing((RomanNumber e) ->
+                e.value).reversed() )
                 .collect(Collectors.toList());
     }
-
 
 }
